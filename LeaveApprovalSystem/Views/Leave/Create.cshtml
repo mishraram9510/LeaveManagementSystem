@@ -1,0 +1,96 @@
+﻿@model LeaveApprovalSystem.Models.Leave
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @*<div class="text-danger text-bg-warning">
+            @if (ViewData["NameFlag"] != null)
+            {
+                @ViewData["NameFlag"];
+            }
+        </div>*@
+    <a href="@Url.Action( "Index", "Employee")"><input type="submit" value="Logout" class="btn btn-default btn-danger float-end" /></a>
+    <div class="form-horizontal">
+        <h4>Leave</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.emp_id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @*@if (ViewData["NameFlag"] != null)
+                    {
+                        @ViewData["NameFlag"];
+                    }*@
+
+                <input type="text" class="form-control" disabled="disabled" value="@ViewData["NameFlag"]" />
+                @*@Html.EditorFor(model => model.emp_id, new { htmlAttributes = new { @class = "form-control" } })*@
+
+                @*@Html.EditorFor(model => model.emp_id, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.emp_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.from_date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.EditorFor(model => model.from_date, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+
+                @*@Html.EditorFor(model => model.from_date, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.from_date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.to_date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.EditorFor(model => model.to_date, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+
+                @*@Html.EditorFor(model => model.to_date, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.to_date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.leave_type, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.leave_type, new List<SelectListItem>
+                {
+                        new SelectListItem() {Text = "--Select the Leave Type--"},
+                        new SelectListItem() {Text = "Sick Leave", Value="Sick Leave"},
+                        new SelectListItem() {Text = "Casual Leave", Value="Casual Leave"},
+                        new SelectListItem() {Text = "Maternity Leave", Value="Maternity Leave"},
+                        new SelectListItem() {Text = "Paternity Leave", Value="Paternity Leave"}
+                })
+                @*@Html.EditorFor(model => model.leave_type, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.leave_type, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.reason, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.reason, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.reason, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to Leave List", "Index")
+</div>
